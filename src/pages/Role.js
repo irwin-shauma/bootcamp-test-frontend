@@ -1,13 +1,18 @@
+// import { useNavigate } from 'react-router-dom'
+
 export const Role = () => {
+    // const navigate = useNavigate
+
+
     return (
         <>
-            <div class="container-lg">
-                <p class="h1">Role List</p>
+            <div className="container-lg">
+                <p className="h1">Role List</p>
 
-                <a class="btn btn-info" role="button">Add New Data </a>
-                <table class="table table-striped table-hover border border-success mt-3">
+                <button className="btn btn-info">Add New Data </button>
+                <table className="table table-striped table-hover border border-success mt-3">
                     <thead>
-                        <tr class="text-center align-middle">
+                        <tr className="text-center align-middle">
                             <th scope="col">No</th>
                             <th scope="col">Role Name</th>
                             <th scope="col">Role Code</th>
@@ -16,7 +21,7 @@ export const Role = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        <tr class="text-center align-middle">
+                        <tr className="text-center align-middle">
                             <th scope="row">number</th>
                             <td>roleName</td>
                             <td>roleCode</td>
@@ -24,7 +29,7 @@ export const Role = () => {
                         </tr >
                     </tbody >
                 </table >
-                <a class="btn btn-primary" href="/login" role="button">BACK</a>
+                <a className="btn btn-primary" href="/login" role="button">BACK</a>
             </div >
         </>
     )

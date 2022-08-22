@@ -1,8 +1,11 @@
 
 import { useState } from "react"
-import { postLogin } from "../service/login.service"
+import { postLogin, saveData } from "../service/login.service"
+import { useNavigate } from "react-router-dom";
 
 export const Login = (props) => {
+    const navigate = useNavigate()
+
     const [login, setLogin] = useState({
         userUsername: '',
         userPassw: '',
@@ -23,23 +26,45 @@ export const Login = (props) => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        postLogin(login).then(res => console.log(res))
+        postLogin(login).then(res => {
+            redirectAfterLogin(res)
+        })
+    }
+
+
+    const redirectAfterLogin = (response) => {
+        if (response.data.roleCode === "SA1") {
+            saveData(response)
+            navigate('/roles')
+        }
+        // else if (response.data.roleCode === "HR2") {
+        //     this.loginService.saveData(response)
+        //     this.router.navigateByUrl("/candidates")
+
+        // } else if (response.data.roleCode === "REV3") {
+        //     this.loginService.saveData(response)
+        //     this.router.navigateByUrl("/reviewer-home")
+
+        // } else if (response.data.roleCode === "CAN4") {
+        //     this.loginService.saveData(response)
+        //     this.router.navigateByUrl("/candidate-home")
+        // }
     }
 
     const { userUsername, userPassw } = login
 
     return (
         <>
-            <div class="container-lg position-absolute top-50 start-50 translate-middle mx-auto text-center ">
-                <h1 class="d-grid row col-12">Silahkan Login</h1>
+            <div className="container-lg position-absolute top-50 start-50 translate-middle mx-auto text-center ">
+                <h1 className="d-grid row col-12">Silahkan Login</h1>
 
                 <form onSubmit={handleSubmit}>
-                    <img src="/assets/images/login.png" class="rounded mx-auto d-block img-fluid w-25 mb-3" alt="login" />
-                    <div class="mb-3 row d-flex justify-content-center">
-                        <div class="col-6">
+                    <img src="/assets/images/login.png" className="rounded mx-auto d-block img-fluid w-25 mb-3" alt="login" />
+                    <div className="mb-3 row d-flex justify-content-center">
+                        <div className="col-6">
                             <input
                                 type="text"
-                                class="form-control"
+                                className="form-control"
                                 id="staticEmail"
                                 placeholder="Email"
                                 name="userUsername"
@@ -48,11 +73,11 @@ export const Login = (props) => {
                             />
                         </div>
                     </div>
-                    <div class="mb-3 row d-flex justify-content-center">
-                        <div class="col-6">
+                    <div className="mb-3 row d-flex justify-content-center">
+                        <div className="col-6">
                             <input
                                 type="password"
-                                class="form-control"
+                                className="form-control"
                                 id="inputPassword"
                                 placeholder="Password"
                                 name="userPassw"
@@ -61,12 +86,12 @@ export const Login = (props) => {
                             />
                         </div>
                     </div>
-                    <div class="row d-flex justify-content-center mx-auto ">
-                        <div class="col-md-6 col-sm-12 w-25">
+                    <div className="row d-flex justify-content-center mx-auto ">
+                        <div className="col-md-6 col-sm-12 w-25">
                             <button
                                 type="submit"
                                 value='Submit'
-                                class="btn btn-primary w-50"
+                                className="btn btn-primary w-50"
                             >Login</button>
                         </div>
                     </div>
