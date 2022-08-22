@@ -55,6 +55,7 @@ export const Login = (props) => {
 
     return (
         <>
+            {/* < Navbar /> */}
             <div className="container-lg position-absolute top-50 start-50 translate-middle mx-auto text-center ">
                 <h1 className="d-grid row col-12">Silahkan Login</h1>
 
