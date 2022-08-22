@@ -10,4 +10,14 @@ async function postApi(url, data) {
         .then(res => res.data)
 }
 
-export { getApi, postApi }
+async function putApi(url, data) {
+
+    return axios.put(url, data, { method: 'PUT'})
+    .then(res => res.data)
+}
+
+async function deleteApi(url) {
+    return axios.delete(url).then(res => res.data)
+}
+
+export { getApi, postApi, putApi, deleteApi}

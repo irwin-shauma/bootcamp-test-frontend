@@ -5,7 +5,8 @@ import { BrowserRouter, Outlet, Route, Routes } from 'react-router-dom';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
 import { Login } from './pages/Login'
-import { Role } from './pages/Role'
+import { Role } from './pages/Role/role-list/Role'
+import { Profile } from './pages/Profile'
 // import App from "./App";
 // import Expenses from "./routes/expenses";
 // import Invoices from "./routes/invoices";
@@ -20,6 +21,7 @@ root.render(
       <Route path='/' element={<Main />} >
         <Route path='login' element={<Login />} index />
         <Route path='roles' element={<Role />} index />
+        <Route path='profiles' element={<Profile />} index />
 
 
       </Route>
