@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from '../interceptor/custom.interceptor';
 
 async function getApi(url) {
     return axios.get(url).then(res => res.data)
@@ -12,12 +12,17 @@ async function postApi(url, data) {
 
 async function putApi(url, data) {
 
-    return axios.put(url, data, { method: 'PUT'})
-    .then(res => res.data)
+    return axios.put(url, data, { method: 'PUT' })
+        .then(res => res.data)
 }
 
 async function deleteApi(url) {
     return axios.delete(url).then(res => res.data)
 }
 
-export { getApi, postApi, putApi, deleteApi}
+export {
+    getApi,
+    postApi,
+    putApi,
+    deleteApi
+}

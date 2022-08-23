@@ -1,8 +1,7 @@
-// import { useNavigate } from 'react-router-dom'
 
-// import axios from '../interceptor/custom.interceptor'
-import { getRoles, deleteRoles } from '../../../service/role.service'
+import { getRoles, deleteRole } from '../../../service/role.service'
 import { useEffect, useState } from 'react'
+import { Outlet, useNavigate } from 'react-router-dom'
 
 export const Role = () => {
     const [role, setRole] = useState([])
@@ -18,14 +17,15 @@ export const Role = () => {
         roleId = Id
     }
 
-    const deleteRole = (Id) => {
-        deleteRoles(Id).then(() => {
+    const deleteCurrentRole = (Id) => {
+        deleteRole(Id).then(() => {
             getRoles().then((res) => {
                 setRole(res.data)
             })
         })
     }
 
+    const navigate = useNavigate()
 
     const ShowRoles = (props) => {
         return (
@@ -37,7 +37,7 @@ export const Role = () => {
                         <td>{props.roleCode}</td>
                         <td>{props.isActive ? 'AKTIF' : 'NONAKTIF'}</td>
                         <td>
-                            <button className="btn btn-info" >Edit</button>
+                            <button className="btn btn-info" onClick={() => navigate(`/roles/${props.id}`)} >Edit</button>
                             <button className="btn btn-danger ms-2" onClick={() => getRoleId(props.id)} data-bs-toggle="modal" data-bs-target="#exampleModal">Delete</button>
                         </td>
                     </tr >
@@ -50,7 +50,7 @@ export const Role = () => {
         <>
             <div className="container-lg">
                 <p className="h1">Role List</p>
-                <button className="btn btn-info">Add New Data </button>
+                <button className="btn btn-info" onClick={() => navigate('/roles/create')}>Add New Data </button>
                 <table className="table table-striped table-hover border border-success mt-3">
                     <thead>
                         <tr className="text-center align-middle">
@@ -77,7 +77,7 @@ export const Role = () => {
                                 Are you sure to delete this role?
                             </div>
                             <div className="modal-footer">
-                                <button type="button" className="btn btn-danger" onClick={() => deleteRole(roleId)} data-bs-dismiss="modal">YES</button>
+                                <button type="button" className="btn btn-danger" onClick={() => deleteCurrentRole(roleId)} data-bs-dismiss="modal">YES</button>
                                 <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">NO</button>
                             </div>
                         </div>
@@ -87,6 +87,8 @@ export const Role = () => {
 
                 <a className="btn btn-primary" href="/login" role="button">BACK</a>
             </div >
+
+            <Outlet />
         </>
     )
 }
